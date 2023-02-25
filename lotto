@@ -1,0 +1,50 @@
+from random import randint as rnd
+
+zakres = 49
+los = 6
+
+def losowanie():
+    losy = []
+    for i in range(los):
+        liczba = rnd(1, zakres)
+        while liczba in losy:
+            liczba = rnd(1, zakres)
+        losy.append(liczba)
+    return losy
+
+def typowanie():
+    typy = []
+    for i in range(los):
+        while True:
+            try:
+                typ = int(input(f"podaj liczbę z zakresu od 1 do {zakres}:"))
+                if typ < 1 or typ > zakres:
+                    print(' poza zakresem')
+                elif typ in typy:
+                    print(' licza już jest, podaj jeszcze raz: ')
+                else:
+                    break
+            except:
+                print('podaj liczbę całkowitą !')
+        typy.append(typ)
+    return typy
+
+
+losy = losowanie()
+losy.sort()
+typy = typowanie()
+typy.sort()
+
+traf = 0
+trafienia = []
+
+for typ in typy:
+    if typ in losy:
+        traf += 1
+        trafienia.append(typ)
+
+
+print(f"wylosowane liczby: {losy}")
+print(f"wylosowane liczby: {typy}")
+print(f"trafiłaś {traf} razy !")
+print(f"lista trafień: {trafienia}")
